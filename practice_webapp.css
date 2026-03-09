@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+* {
+    color: #272343;
+}
+
+body {
+    text-align: center;
+    background-color: #fffffe;
+    width : 100%;
+    letter-spacing: 2px;
+}
+
+main, header nav{
+     margin: auto 11%;
+}
+
+header {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    background-color: #e3f6f5;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+nav span , nav form{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-end;
+}
+
+nav .login {
+    width: 400px;
+}
+
+.login p, .login a{
+    margin:3px;
+}
+
+.login a {
+    border: #2d334a 2px solid;
+    width: 110px;
+    height: 25px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+nav form input{
+    margin-left: 6px;
+    background-color: #e3f6f5;
+    border-radius: 4px;
+    border-style: none;
+    border: #272343 2px solid;
+    width: 80px;
+    height: 30px;
+    font-weight: bolder;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, form input:hover{
+    opacity: 0.5;
+}
+
+img {
+    width: 40%;
+}
+footer {
+    height: 130px;
+    background-color: #e3f6f5;
+}
+
+.button {
+    background-color: #ffd803;
+    border-style: none;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 130px;
+    height: 29px;
+    margin-top: 18px;
+    letter-spacing: 3px;
+}
+
+ol {
+    counter-reset: my-counter;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ol li {
+    font-size: 18px;
+    padding-left: 40px;
+    padding-top: 14px;
+    position: relative;
+    margin: 20px;
+}
+
+ol li:before {
+    content: counter(my-counter);
+    counter-increment: my-counter;
+    border: 2px solid;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    font-size: 85%;
+    position: absolute;
+    top: 14px;
+    left: 0;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file {
+    margin: 4px;
+}
+
+.errMsg {
+    color: #ff5470;
+    font-weight: bold;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+textarea {
+    width: 250px;
+    height: 80px;
+}
+
+.backToTop {
+    width: 150px;
+    height: 50px;
+    margin-top: 50px;
+    letter-spacing: 3px;
+    border: #272343 2px solid;
+    background-color : #e3f6f5;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+ul li {
+    margin-bottom: 20px;
+}
+
+.posts {
+    background-color: #efefef;
+}
+.post {
+    margin: 0 auto 0 30px;
+    padding: 0 0px 20px;
+}
+
+.delete {
+    display: flex;
+    justify-content: flex-end;
+}
