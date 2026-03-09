@@ -15,11 +15,11 @@ main {
     background-position: bottom right;
     text-align: left;
     margin-bottom: 100px;
-    height: 1500px;
+    height: 100%;
 }
 .rgba {
     background: rgba(255,255,255,0.8);
-    height: 1500px;
+    min-height: 1500px;
 }
 .notFind, .find {
     text-align: center;
