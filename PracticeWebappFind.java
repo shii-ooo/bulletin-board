@@ -68,17 +68,17 @@ public class PracticeWebappFind extends HttpServlet {
 
                     ResultSet resultSet = statement.executeQuery();
 
-                    ArrayList<ThreadTitle> threadTitles = new ArrayList<ThreadTitle>();
+                    ArrayList<ThreadTitle> threads = new ArrayList<ThreadTitle>();
 
                     while (resultSet.next()) {
                         int threadId = resultSet.getInt("thread_id");
                         String title = resultSet.getString("thread_title");
                         String categoryName = resultSet.getString("category_name");
                         ThreadTitle threadtitle = new ThreadTitle(threadId, title, categoryName);
-                        threadTitles.add(threadtitle);
+                        threads.add(threadtitle);
                     }
 
-                    request.setAttribute("threadTitles", threadTitles);
+                    request.setAttribute("threads", threads);
 
                 } catch (Exception e) {
                     e.printStackTrace();
