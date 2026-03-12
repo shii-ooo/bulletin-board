@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -24,22 +23,12 @@ public class PracticeWebappMenu extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-
-        String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                + "password=SQLPassword1234";
-
         String sql = "SELECT threads.thread_id, threads.thread_title, COUNT(posts.post_number) AS post_count,categorys.category_name FROM threads LEFT JOIN posts ON threads.thread_id = posts.thread_id "
                 + "INNER JOIN categorys ON threads.category_id = categorys.category_id GROUP BY threads.thread_id, threads.thread_title, categorys.category_name ORDER BY post_count DESC OFFSET ? ROWS FETCH NEXT 20 ROWS ONLY;";
 
         String page = request.getParameter("page");
 
-        try (Connection connection = DriverManager.getConnection(url);) {
+        try (Connection connection = DatabaseUtil.getConnection();) {
             
             ArrayList<ThreadTitle> threads = new ArrayList<ThreadTitle>();
 

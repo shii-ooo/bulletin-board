@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import jakarta.servlet.http.HttpSession;
@@ -29,19 +28,9 @@ public class PracticeWebappIsPost extends HttpServlet {
             String post = request.getParameter("post");
             String img = request.getParameter("img");
 
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(e);
-            }
-
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                    + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                    + "password=SQLPassword1234";
-
             String userId = null;
 
-            try (Connection connection = DriverManager.getConnection(url);) {
+            try (Connection connection = DatabaseUtil.getConnection();) {
 
                 String userIdSql = "SELECT user_id FROM users WHERE user_display_id = ?";
 

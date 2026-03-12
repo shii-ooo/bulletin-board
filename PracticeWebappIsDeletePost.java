@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 /**
@@ -23,19 +22,9 @@ public class PracticeWebappIsDeletePost extends HttpServlet {
 	    if("削除".equals(request.getParameter("submit"))){
 	        String postNumber = request.getParameter("postNumber");
 	        
-	        try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(e);
-            }
+	        String sql = "DELETE posts WHERE post_number = ?";
 
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                    + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                    + "password=SQLPassword1234";
-            
-            String sql = "DELETE posts WHERE post_number = ?";
-            
-            try (Connection connection = DriverManager.getConnection(url);
+            try (Connection connection = DatabaseUtil.getConnection();
                     PreparedStatement statement = connection.prepareStatement(sql);){
                 
                 statement.setString(1, postNumber);
