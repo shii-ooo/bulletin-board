@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -44,16 +43,6 @@ public class PracticeWebappIsCreateThread extends HttpServlet {
                 categoryId = 5;
             }
             
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(e);
-            }
-
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                    + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                    + "password=SQLPassword1234";
-
             HttpSession session = request.getSession(false);
             String userDisplayId = (String) session.getAttribute("id");
             String userId = null;
@@ -63,7 +52,7 @@ public class PracticeWebappIsCreateThread extends HttpServlet {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = dateFormat.format(calendar.getTime());
 
-            try (Connection connection = DriverManager.getConnection(url);) {
+            try (Connection connection = DatabaseUtil.getConnection();) {
 
                 //
                 // ユーザーIDを取得

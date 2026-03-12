@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -27,19 +26,9 @@ public class PracticeWebappIsIntoUser extends HttpServlet {
             String id = request.getParameter("id");
             String pw = DigestUtils.sha256Hex(request.getParameter("pw"));
             
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(e);
-            }
-
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                    + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                    + "password=SQLPassword1234";
-
             String sql = "INSERT INTO users(user_name, user_display_id , pw) VALUES(?, ? , ?)";
 
-            try (Connection connection = DriverManager.getConnection(url);
+            try (Connection connection = DatabaseUtil.getConnection();
                     PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, userName);
                 statement.setString(2, id);

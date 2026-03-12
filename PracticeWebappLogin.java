@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -45,19 +44,9 @@ public class PracticeWebappLogin extends HttpServlet {
             doGet(request,response);
         } else {
 
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                System.out.println(e);
-            }
-
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                    + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                    + "password=SQLPassword1234";
-
             String sql = "SELECT * FROM users WHERE user_display_id = ? AND pw = ?";
 
-            try (Connection connection = DriverManager.getConnection(url);
+            try (Connection connection = DatabaseUtil.getConnection();
                     PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, id);
                 statement.setString(2, pw);

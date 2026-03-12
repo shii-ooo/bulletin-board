@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -22,12 +21,6 @@ public class PracticeWebappFind extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
 
         String find = request.getParameter("find");
         String category = request.getParameter("category");
@@ -44,14 +37,10 @@ public class PracticeWebappFind extends HttpServlet {
             categoryId = 5;
         }
 
-        String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;database=practice01;" + "enxrypt=true;"
-                + "trustServerCertificate=true;" + "integratedSecurity=false;" + "user=sa;"
-                + "password=SQLPassword1234";
-
         if (find == null || find.equals("")) {
             request.setAttribute("errFind", "検索ワードを入力してください");
         } else {
-            try (Connection connection = DriverManager.getConnection(url);) {
+            try (Connection connection = DatabaseUtil.getConnection();) {
                 
                 //
                 //検索
